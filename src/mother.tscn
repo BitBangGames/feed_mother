@@ -5,7 +5,7 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_gmfve"]
 radius = 8.0
 
-[node name="Mother" type="RigidBody3D" unique_id=38965936]
+[node name="Mother" type="CharacterBody3D" unique_id=67164482]
 script = ExtResource("1_a4met")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=751799867]

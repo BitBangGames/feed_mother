@@ -28,12 +28,6 @@ static func get_singleton() -> Main:
 
 	return __singleton
 
-static func isometric(cartesian: Vector3) -> Vector2:
-	return Vector2(
-		cartesian.x - cartesian.z + Consts.SCREEN_CENTER.x,
-		0.5*(cartesian.x + cartesian.z) - cartesian.y + Consts.SCREEN_CENTER.y
-	)
-
 func _init() -> void:
 	if (__singleton != null and __singleton != self):
 		queue_free()
