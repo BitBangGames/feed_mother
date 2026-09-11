@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cnibm1rccm1pi"]
+
+[ext_resource type="Texture2D" uid="uid://d3ejm3fyuxw0" path="res://spr/spr_mother.png" id="1_8l10o"]
+
+[node name="MotherSprite" type="Sprite2D" unique_id=1359545177]
+z_as_relative = false
+y_sort_enabled = true
+texture = ExtResource("1_8l10o")
+hframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1957773102]
