@@ -12,7 +12,7 @@ static func get_singleton() -> Player:
 	return __singleton
 
 func _init() -> void:
-	set_position(Vector3(32.0, 32.0, 32.0))
+	set_position(Vector3(32.0, 4.0, 32.0))
 
 func _ready() -> void:
 	set_sprite(preload("res://src/player_sprite.tscn").instantiate() as Sprite2D)
