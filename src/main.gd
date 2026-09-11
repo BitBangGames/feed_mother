@@ -58,8 +58,8 @@ func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("fullscreen")):
 		set_fullscreen(not __fullscreen)
 
-func set_fullscreen(opt: bool) -> void:
-	__fullscreen = opt
+func set_fullscreen(val: bool) -> void:
+	__fullscreen = val
 	DisplayServer.window_set_mode(
 		DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN if (__fullscreen)
 		else DisplayServer.WINDOW_MODE_WINDOWED
