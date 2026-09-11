@@ -17,6 +17,9 @@ size = Vector3(64, 8, 64)
 [sub_resource type="BoxShape3D" id="BoxShape3D_g31cv"]
 size = Vector3(32, 8, 32)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_hgrid"]
+size = Vector3(16, 8, 16)
+
 [node name="Map" type="StaticBody3D" unique_id=1506366901]
 
 [node name="Floor" type="CollisionShape3D" parent="." unique_id=1157184750]
@@ -38,5 +41,17 @@ shape = SubResource("BoxShape3D_xnnkc")
 [node name="Layer2" type="CollisionShape3D" parent="." unique_id=491296636]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 12, 16)
 shape = SubResource("BoxShape3D_g31cv")
+
+[node name="Layer3" type="CollisionShape3D" parent="." unique_id=125244445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 20, 8)
+shape = SubResource("BoxShape3D_hgrid")
+
+[node name="Layer4" type="CollisionShape3D" parent="." unique_id=1777855306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 32, 20)
+shape = SubResource("BoxShape3D_hgrid")
+
+[node name="Layer5" type="CollisionShape3D" parent="." unique_id=1572306856]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 40, 44)
+shape = SubResource("BoxShape3D_hgrid")
 
 [node name="MapCanvas" parent="." unique_id=557316898 instance=ExtResource("1_hgrid")]

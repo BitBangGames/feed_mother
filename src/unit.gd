@@ -31,9 +31,6 @@ func _physics_process(_delta: float) -> void:
 	__collided = (move_and_slide() and not is_on_floor_only())
 
 	get_sprite().set_position(isometric(get_position()))
-	get_sprite().set_z_index(int(
-		get_position().y - ((get_child(0) as CollisionShape3D).get_shape() as SphereShape3D).get_radius()
-	) >> 0b11)
 
 func set_sprite(val: Sprite2D) -> void:
 	__sprite = val
@@ -53,3 +50,6 @@ func get_vel_y() -> int:
 
 func just_collided() -> bool:
 	return (__collided and not __collided_prev)
+
+func update_z_index() -> void:
+	get_sprite().set_z_index(int(get_position().y) >> 0b11)

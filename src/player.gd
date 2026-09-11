@@ -37,4 +37,6 @@ func _physics_process(_delta: float) -> void:
 		get_sprite().set_flip_h(Input.is_action_pressed("up"))
 		get_anim_player().play("back_walk")
 
+	update_z_index()
+
 	super(_delta)
