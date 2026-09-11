@@ -26,8 +26,6 @@ func _physics_process(_delta: float) -> void:
 		set_vel_y(0)
 
 	__collided_prev = __collided
-	__collided = false
-
 	__collided = (move_and_slide() and not is_on_floor_only())
 
 	get_sprite().set_position(isometric(get_position()))
@@ -47,6 +45,9 @@ func set_vel_y(val: int) -> void:
 
 func get_vel_y() -> int:
 	return __vel_y
+
+func is_collided() -> bool:
+	return __collided
 
 func just_collided() -> bool:
 	return (__collided and not __collided_prev)
