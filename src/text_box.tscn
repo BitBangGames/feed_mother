@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://vb5ixhhpcqta"]
+
+[ext_resource type="FontFile" uid="uid://dsh0sni5y5ssm" path="res://bkg/bkg_font.png" id="1_7uwj5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y4ayn"]
+font = ExtResource("1_7uwj5")
+font_size = 8
+
+[node name="TextBox" type="Label" unique_id=1149099625]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -19.0
+offset_right = 160.0
+grow_vertical = 0
+text = "Thanks for reading the source code!"
+label_settings = SubResource("LabelSettings_y4ayn")
+vertical_alignment = 2
+autowrap_mode = 2

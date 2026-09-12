@@ -8,3 +8,8 @@ const JUMP_HEIGHT: int = 0b10000000
 const ACCEL_Y: int = 0b1000
 
 const MAP_CANVAS_PATH: NodePath = "/root/Main/Map/MapCanvas"
+
+enum State {
+	TITLE_STATE,
+	GAME_STATE,
+}

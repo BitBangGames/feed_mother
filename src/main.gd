@@ -34,16 +34,12 @@ func _init() -> void:
 
 	__singleton = self
 
-	print("Feed Mother, a game by Bit Bang Games")
+	print("Feed Mother by Bit Bang Games")
 	print("Source code: https://github.com/BitBangGames/feed_mother")
 	print("https://godotengine.org/license")
 
 func _ready() -> void:
-	__map = preload("res://map/map.tscn").instantiate()
-	add_child(__map)
-
-	__map.add_child(Player.get_singleton())
-	__map.add_child(Mother.get_singleton())
+	set_state(Consts.State.GAME_STATE)
 
 func _notification(what: int) -> void:
 	match what:
@@ -64,6 +60,16 @@ func set_fullscreen(val: bool) -> void:
 		DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN if (__fullscreen)
 		else DisplayServer.WINDOW_MODE_WINDOWED
 	)
+
+func set_state(val: Consts.State) -> void:
+	match val:
+		Consts.State.GAME_STATE:
+			__map = preload("res://map/map.tscn").instantiate()
+			add_child(__map)
+
+			__map.add_child(Player.get_singleton())
+			__map.add_child(Mother.get_singleton())
+			__map.add_child(preload("res://src/text_box.tscn").instantiate())
 
 func exit(err: Error = Error.OK) -> void:
 	queue_free()
