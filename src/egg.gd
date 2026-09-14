@@ -6,4 +6,14 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	update_z_index()
+
+	for i: int in get_slide_collision_count():
+		var collision: KinematicCollision3D = get_slide_collision(i)
+
+		if (collision.get_collider() is Mother):
+			Mother.get_singleton().feed_mother()
+			queue_free()
+
 	super(_delta)
+
+	set_velocity(Vector3(0, get_velocity().y, 0))
