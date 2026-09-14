@@ -22,8 +22,13 @@ func _physics_process(_delta: float) -> void:
 
 	set_velocity(Vector3(0, get_velocity().y, 0))
 
+func _on_timer_timeout() -> void:
+	set_broken(true)
+
 func get_eggs() -> int:
 	return __eggs
 
 func feed_mother() -> void:
+	get_anim_player().play("eye_open")
 	__eggs = __eggs + 1
+	(get_node("Timer") as Timer).start()

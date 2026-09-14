@@ -14,5 +14,12 @@ const MAP_CANVAS_PATH: NodePath = "/root/Main/Map/MapCanvas"
 enum State {
 	TITLE_STATE,
 	GAME_STATE,
-	CUTSCENE_STATE,
+	ENDING_STATE,
+}
+
+enum Ending {
+	FEED_ENDING,
+	DEVOUR_ENDING,
+	FALL_ENDING,
+	TRUE_ENDING,
 }

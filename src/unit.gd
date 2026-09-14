@@ -59,10 +59,7 @@ func is_broken() -> bool:
 
 func set_broken(val: bool) -> void:
 	__broken = val
-	if (get_anim_player()):
-		get_anim_player().play("broken")
-	else:
-		get_sprite().set_frame(1)
+	get_sprite().set_frame(1)
 
 func update_z_index() -> void:
 	get_sprite().set_z_index(int(get_position().y) >> 0b11)
