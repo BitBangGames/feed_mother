@@ -71,7 +71,7 @@ func set_state(val: Consts.State) -> void:
 
 			__map.add_child(Player.get_singleton())
 			__map.add_child(Mother.get_singleton())
-			__map.add_child(preload("res://src/text_box.tscn").instantiate())
+			__map.add_child(TextBox.get_singleton())
 
 func get_state() -> Consts.State:
 	return __state

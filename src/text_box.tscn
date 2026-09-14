@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://vb5ixhhpcqta"]
 
 [ext_resource type="FontFile" uid="uid://dsh0sni5y5ssm" path="res://bkg/bkg_font.png" id="1_7uwj5"]
+[ext_resource type="Script" uid="uid://c3am1vixny40a" path="res://src/text_box.gd" id="2_sqkml"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_y4ayn"]
 font = ExtResource("1_7uwj5")
@@ -17,3 +18,8 @@ text = "Thanks for reading the source code!"
 label_settings = SubResource("LabelSettings_y4ayn")
 vertical_alignment = 2
 autowrap_mode = 2
+script = ExtResource("2_sqkml")
+
+[node name="Timer" type="Timer" parent="." unique_id=243265473]
+wait_time = 4.0
+autostart = true
