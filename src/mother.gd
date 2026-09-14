@@ -25,10 +25,21 @@ func _physics_process(_delta: float) -> void:
 func _on_timer_timeout() -> void:
 	set_broken(true)
 
+func set_broken(val: bool) -> void:
+	TextBox.get_singleton().set_text("")
+	super(val)
+
 func get_eggs() -> int:
 	return __eggs
 
 func feed_mother() -> void:
 	get_anim_player().play("eye_open")
 	__eggs = __eggs + 1
-	(get_node("Timer") as Timer).start()
+	if (__eggs < 0b11):
+		(get_node("Timer") as Timer).start()
+	elif (__eggs > 0b11):
+		set_broken(true)
+	else:
+		(get_node("Timer") as Timer).stop()
+
+	TextBox.get_singleton().set_text_arr(__eggs)
