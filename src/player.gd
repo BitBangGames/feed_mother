@@ -46,7 +46,7 @@ func _physics_process(_delta: float) -> void:
 	for i: int in get_slide_collision_count():
 		var collision: KinematicCollision3D = get_slide_collision(i)
 
-		if (collision.get_collider() is Unit):
+		if (collision.get_collider() is Unit and not (collision.get_collider() as Unit).is_broken()):
 			var collider: Unit = collision.get_collider()
 			if (collider is Mother):
 				collider.set_velocity(Vector3(
@@ -56,12 +56,13 @@ func _physics_process(_delta: float) -> void:
 				))
 			else:
 				collider.set_velocity(Vector3(
-					get_input_vector().x*Consts.SPEED,
+					get_input_vector().x*(Consts.SPEED >> 1),
 					collider.get_velocity().y,
-					get_input_vector().y*Consts.SPEED
+					get_input_vector().y*(Consts.SPEED >> 1)
 				))
 
-	print(get_input_vector())
+				if (is_standing_on(collider)):
+					collider.set_broken(true)
 
 	super(_delta)
 
@@ -70,3 +71,8 @@ func get_input_vector() -> Vector2:
 
 func set_input_vector(val: Vector2) -> void:
 	__input_vector = val
+
+func is_standing_on(unit: Unit) -> bool:
+	return (
+		get_sprite().get_z_index() > unit.get_sprite().get_z_index()
+		and not unit.get_velocity())

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://jqmhnhbr8js3"]
 
 [ext_resource type="PackedScene" uid="uid://dlm1ex1dtsd7o" path="res://map/map_canvas.tscn" id="1_hgrid"]
+[ext_resource type="PackedScene" uid="uid://dl1cxtc0le0i6" path="res://src/egg.tscn" id="2_a0dt8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ga8v5"]
 size = Vector3(96, 0, 96)
@@ -55,3 +56,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28, 40, 44)
 shape = SubResource("BoxShape3D_hgrid")
 
 [node name="MapCanvas" parent="." unique_id=557316898 instance=ExtResource("1_hgrid")]
+
+[node name="Egg" parent="." unique_id=1567905165 instance=ExtResource("2_a0dt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 256, 12)
+
+[node name="Egg2" parent="." unique_id=2002394570 instance=ExtResource("2_a0dt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 256, 24)
+
+[node name="Egg3" parent="." unique_id=980921115 instance=ExtResource("2_a0dt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 256, 48)
+
+[node name="Egg4" parent="." unique_id=1276689914 instance=ExtResource("2_a0dt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76, 256, 12)
+
+[node name="Egg5" parent="." unique_id=643577473 instance=ExtResource("2_a0dt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 256, 76)

@@ -5,6 +5,7 @@ extends CharacterBody3D
 var __collided: bool
 var __collided_prev: bool
 var __vel_y: int
+var __broken: bool = false
 
 var __sprite: Sprite2D = null
 
@@ -52,6 +53,16 @@ func is_collided() -> bool:
 
 func just_collided() -> bool:
 	return (__collided and not __collided_prev)
+
+func is_broken() -> bool:
+	return __broken
+
+func set_broken(val: bool) -> void:
+	__broken = val
+	if (get_anim_player()):
+		get_anim_player().play("broken")
+	else:
+		get_sprite().set_frame(1)
 
 func update_z_index() -> void:
 	get_sprite().set_z_index(int(get_position().y) >> 0b11)
