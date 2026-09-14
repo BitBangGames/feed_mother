@@ -18,12 +18,16 @@ func _ready() -> void:
 	set_sprite(preload("res://src/player_sprite.tscn").instantiate() as Sprite2D)
 
 func _physics_process(_delta: float) -> void:
-	__input_vector = Input.get_vector("left", "right", "up", "down")*Consts.SPEED
+	set_input_vector(Input.get_vector("left", "right", "up", "down"))
 
 	if (is_on_floor() and Input.is_action_just_pressed("confirm")):
 		set_vel_y(get_vel_y() + Consts.JUMP_HEIGHT)
 
-	set_velocity(Vector3(__input_vector.x, __vel_y, __input_vector.y))
+	set_velocity(Vector3(
+		get_input_vector().x*Consts.SPEED,
+		get_velocity().y,
+		get_input_vector().y*Consts.SPEED
+	))
 
 	if (Input.is_action_just_released("right") or Input.is_action_just_released("down")):
 		get_anim_player().play("front")
@@ -39,4 +43,30 @@ func _physics_process(_delta: float) -> void:
 
 	update_z_index()
 
+	for i: int in get_slide_collision_count():
+		var collision: KinematicCollision3D = get_slide_collision(i)
+
+		if (collision.get_collider() is Unit):
+			var collider: Unit = collision.get_collider()
+			if (collider is Mother):
+				collider.set_velocity(Vector3(
+					get_input_vector().x,
+					collider.get_velocity().y,
+					get_input_vector().y
+				))
+			else:
+				collider.set_velocity(Vector3(
+					get_input_vector().x*Consts.SPEED,
+					collider.get_velocity().y,
+					get_input_vector().y*Consts.SPEED
+				))
+
+	print(get_input_vector())
+
 	super(_delta)
+
+func get_input_vector() -> Vector2:
+	return __input_vector
+
+func set_input_vector(val: Vector2) -> void:
+	__input_vector = val

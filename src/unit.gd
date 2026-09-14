@@ -25,6 +25,7 @@ func _physics_process(_delta: float) -> void:
 	elif (get_vel_y() < 0):
 		set_vel_y(0)
 
+	set_velocity(Vector3(get_velocity().x, get_vel_y(), get_velocity().z))
 	__collided_prev = __collided
 	__collided = (move_and_slide() and not is_on_floor_only())
 
