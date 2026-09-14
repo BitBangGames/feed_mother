@@ -21,6 +21,7 @@ static var __singleton: Main = null
 
 var __fullscreen: bool = true
 var __map: StaticBody3D
+var __state: Consts.State
 
 static func get_singleton() -> Main:
 	if (__singleton == null):
@@ -62,6 +63,7 @@ func set_fullscreen(val: bool) -> void:
 	)
 
 func set_state(val: Consts.State) -> void:
+	__state = val
 	match val:
 		Consts.State.GAME_STATE:
 			__map = preload("res://map/map.tscn").instantiate()
@@ -70,6 +72,9 @@ func set_state(val: Consts.State) -> void:
 			__map.add_child(Player.get_singleton())
 			__map.add_child(Mother.get_singleton())
 			__map.add_child(preload("res://src/text_box.tscn").instantiate())
+
+func get_state() -> Consts.State:
+	return __state
 
 func exit(err: Error = Error.OK) -> void:
 	queue_free()

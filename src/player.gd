@@ -18,51 +18,53 @@ func _ready() -> void:
 	set_sprite(preload("res://src/player_sprite.tscn").instantiate() as Sprite2D)
 
 func _physics_process(_delta: float) -> void:
-	set_input_vector(Input.get_vector("left", "right", "up", "down"))
+	if (Main.get_singleton().get_state() == Consts.State.GAME_STATE):
 
-	if (is_on_floor() and Input.is_action_just_pressed("confirm")):
-		set_vel_y(get_vel_y() + Consts.JUMP_HEIGHT)
+		set_input_vector(Input.get_vector("left", "right", "up", "down"))
 
-	set_velocity(Vector3(
-		get_input_vector().x*Consts.SPEED,
-		get_velocity().y,
-		get_input_vector().y*Consts.SPEED
-	))
+		if (is_on_floor() and Input.is_action_just_pressed("confirm")):
+			set_vel_y(get_vel_y() + Consts.JUMP_HEIGHT)
 
-	if (Input.is_action_just_released("right") or Input.is_action_just_released("down")):
-		get_anim_player().play("front")
-	elif (Input.is_action_just_released("left") or Input.is_action_just_released("up")):
-		get_anim_player().play("back")
+		set_velocity(Vector3(
+			get_input_vector().x*Consts.SPEED,
+			get_velocity().y,
+			get_input_vector().y*Consts.SPEED
+		))
 
-	if (Input.is_action_pressed("right") or Input.is_action_pressed("down")):
-		get_sprite().set_flip_h(Input.is_action_pressed("down"))
-		get_anim_player().play("front_walk")
-	elif (Input.is_action_pressed("left") or Input.is_action_pressed("up")):
-		get_sprite().set_flip_h(Input.is_action_pressed("up"))
-		get_anim_player().play("back_walk")
+		if (Input.is_action_just_released("right") or Input.is_action_just_released("down")):
+			get_anim_player().play("front")
+		elif (Input.is_action_just_released("left") or Input.is_action_just_released("up")):
+			get_anim_player().play("back")
+
+		if (Input.is_action_pressed("right") or Input.is_action_pressed("down")):
+			get_sprite().set_flip_h(Input.is_action_pressed("down"))
+			get_anim_player().play("front_walk")
+		elif (Input.is_action_pressed("left") or Input.is_action_pressed("up")):
+			get_sprite().set_flip_h(Input.is_action_pressed("up"))
+			get_anim_player().play("back_walk")
+
+		for i: int in get_slide_collision_count():
+			var collision: KinematicCollision3D = get_slide_collision(i)
+
+			if (collision.get_collider() is Unit and not (collision.get_collider() as Unit).is_broken()):
+				var collider: Unit = collision.get_collider()
+				if (collider is Mother):
+					collider.set_velocity(Vector3(
+						get_input_vector().x,
+						collider.get_velocity().y,
+						get_input_vector().y
+					))
+				else:
+					collider.set_velocity(Vector3(
+						get_input_vector().x*(Consts.SPEED >> 1),
+						collider.get_velocity().y,
+						get_input_vector().y*(Consts.SPEED >> 1)
+					))
+
+					if (is_standing_on(collider)):
+						collider.set_broken(true)
 
 	update_z_index()
-
-	for i: int in get_slide_collision_count():
-		var collision: KinematicCollision3D = get_slide_collision(i)
-
-		if (collision.get_collider() is Unit and not (collision.get_collider() as Unit).is_broken()):
-			var collider: Unit = collision.get_collider()
-			if (collider is Mother):
-				collider.set_velocity(Vector3(
-					get_input_vector().x,
-					collider.get_velocity().y,
-					get_input_vector().y
-				))
-			else:
-				collider.set_velocity(Vector3(
-					get_input_vector().x*(Consts.SPEED >> 1),
-					collider.get_velocity().y,
-					get_input_vector().y*(Consts.SPEED >> 1)
-				))
-
-				if (is_standing_on(collider)):
-					collider.set_broken(true)
 
 	super(_delta)
 
