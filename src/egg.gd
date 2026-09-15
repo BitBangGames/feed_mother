@@ -10,7 +10,7 @@ func _physics_process(_delta: float) -> void:
 	for i: int in get_slide_collision_count():
 		var collision: KinematicCollision3D = get_slide_collision(i)
 
-		if (collision.get_collider() is Mother):
+		if (collision.get_collider() is Mother and not Mother.get_singleton().is_broken()):
 			Mother.get_singleton().feed_mother()
 			queue_free()
 
