@@ -31,6 +31,9 @@ func set_text_arr(eggs: int) -> void:
 			__text_arr = Consts.TEXT_TWO_EGGS
 		0b11:
 			__text_arr = Consts.TEXT_THREE_EGGS
+		_:
+			set_text("")
+			return
 
 	__index = 0
 	(get_node("Timer") as Timer).start()

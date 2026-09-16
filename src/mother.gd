@@ -33,12 +33,14 @@ func get_eggs() -> int:
 	return __eggs
 
 func feed_mother() -> void:
-	get_anim_player().play("eye_open")
 	__eggs = __eggs + 1
+	if (__eggs > 0b11):
+		set_broken(true)
+		return
+
+	get_anim_player().play("eye_open")
 	if (__eggs < 0b11):
 		(get_node("Timer") as Timer).start()
-	elif (__eggs > 0b11):
-		set_broken(true)
 	else:
 		(get_node("Timer") as Timer).stop()
 

@@ -111,7 +111,22 @@ const TEXT_TWO_EGGS: PackedStringArray = [
 ]
 
 const TEXT_THREE_EGGS: PackedStringArray = [
-
+	"Can you hear it?",
+	"Can you feel it?",
+	"Mother's heart beats.",
+	"Excited, ecstatic, elated.",
+	"But.",
+	"Yet.",
+	"She is still not satisfied.",
+	"She yearns to give you a reward.",
+	"Jump onto Mother.",
+	"Stand on top of her great figure.",
+	"Do not do anything else.",
+	"You do not need to do anything else.",
+	"Stand on Mother, and this game will be over.",
+	"She does not need four eggs.",
+	"Or five, or six, or the rest.",
+	"Everyone is believing in you.",
 ]
 
 enum State {
