@@ -3,8 +3,8 @@ extends Label
 
 static var __singleton: TextBox = null
 
-var __text_arr: PackedStringArray = Consts.TEXT_NO_EGGS
-var __index: int = 0
+var __text_arr: PackedStringArray
+var __index: int
 
 static func get_singleton() -> TextBox:
 	if (__singleton == null):
@@ -13,6 +13,8 @@ static func get_singleton() -> TextBox:
 	return __singleton
 
 func _init() -> void:
+	__text_arr = Consts.TEXT_NO_EGGS
+	__index = 0
 	update_text()
 
 func _on_timer_timeout() -> void:

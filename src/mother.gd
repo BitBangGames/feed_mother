@@ -3,7 +3,7 @@ extends Unit
 
 static var __singleton: Mother = null
 
-var __eggs: int = 0
+var __eggs: int
 
 static func get_singleton() -> Mother:
 	if (__singleton == null):
@@ -12,6 +12,7 @@ static func get_singleton() -> Mother:
 	return __singleton
 
 func _init() -> void:
+	__eggs = 0
 	set_position(Vector3(80.0, 8.0, 80.0))
 
 func _ready() -> void:
