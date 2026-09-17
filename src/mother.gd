@@ -4,6 +4,7 @@ extends Unit
 static var __singleton: Mother = null
 
 var __eggs: int
+var __timer: Timer
 
 static func get_singleton() -> Mother:
 	if (__singleton == null):
@@ -16,6 +17,7 @@ func _init() -> void:
 	set_position(Vector3(80.0, 8.0, 80.0))
 
 func _ready() -> void:
+	__timer = get_node("Timer") as Timer
 	set_sprite(preload("res://src/mother_sprite.tscn").instantiate() as Sprite2D)
 
 func _physics_process(_delta: float) -> void:
@@ -23,7 +25,15 @@ func _physics_process(_delta: float) -> void:
 
 	set_velocity(Vector3(0, get_velocity().y, 0))
 
+func _process(_delta: float) -> void:
+	if not (is_broken()):
+		if (__timer.get_time_left() < 15.0):
+			get_anim_player().play("shake_fast")
+		elif (__timer.get_time_left() < 30.0):
+			get_anim_player().play("shake")
+
 func _on_timer_timeout() -> void:
+	get_anim_player().stop()
 	set_broken(true)
 
 func set_broken(val: bool) -> void:
@@ -41,8 +51,8 @@ func feed_mother() -> void:
 
 	get_anim_player().play("eye_open")
 	if (__eggs < 0b11):
-		(get_node("Timer") as Timer).start()
+		__timer.start()
 	else:
-		(get_node("Timer") as Timer).stop()
+		__timer.stop()
 
 	TextBox.get_singleton().set_text_arr(__eggs)
