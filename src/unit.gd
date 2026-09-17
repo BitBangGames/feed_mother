@@ -11,8 +11,8 @@ var __sprite: Sprite2D = null
 
 static func isometric(cartesian: Vector3) -> Vector2:
 	return Vector2(
-		cartesian.x - cartesian.z + Consts.SCREEN_CENTER.x,
-		0.5*(cartesian.x + cartesian.z) - cartesian.y + Consts.SCREEN_CENTER.y
+		cartesian.x - cartesian.z,
+		0.5*(cartesian.x + cartesian.z) - cartesian.y
 	)
 
 func _notification(what: int) -> void:
