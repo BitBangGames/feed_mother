@@ -50,9 +50,8 @@ func feed_mother() -> void:
 		return
 
 	get_anim_player().play("eye_open")
-	if (__eggs < 0b11):
-		__timer.start()
-	else:
-		__timer.stop()
+	__timer.start()
+	if (__eggs == 0b11):
+		__timer.set_paused(true)
 
 	TextBox.get_singleton().set_text_arr(__eggs)
