@@ -33,6 +33,54 @@ tracks/0/keys = {
 "values": [3, 2, 3, 0]
 }
 
+[sub_resource type="Animation" id="Animation_hc12q"]
+resource_name = "laugh"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [9, 8]
+}
+
+[sub_resource type="Animation" id="Animation_vih46"]
+resource_name = "mouth_open"
+length = 2.2666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 1.0666667, 1.4666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 2, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_xhsac"]
+resource_name = "scream"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
 [sub_resource type="Animation" id="Animation_d76xp"]
 resource_name = "shake"
 loop_mode = 1
@@ -51,7 +99,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_6oq03"]
 resource_name = "shake_fast"
-length = 0.19999999999999998
+length = 0.2
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -70,6 +118,9 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_8l10o"),
 &"eye_open": SubResource("Animation_0bonr"),
+&"laugh": SubResource("Animation_hc12q"),
+&"mouth_open": SubResource("Animation_vih46"),
+&"scream": SubResource("Animation_xhsac"),
 &"shake": SubResource("Animation_d76xp"),
 &"shake_fast": SubResource("Animation_6oq03")
 }
@@ -78,7 +129,7 @@ _data = {
 z_as_relative = false
 y_sort_enabled = true
 texture = ExtResource("1_8l10o")
-hframes = 6
+hframes = 11
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1957773102]
 libraries/ = SubResource("AnimationLibrary_d76xp")

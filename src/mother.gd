@@ -23,6 +23,9 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	super(_delta)
 
+	if (get_velocity().y < 0):
+		Main.get_singleton().init_ending(Consts.Ending.TRUE_ENDING)
+		get_anim_player().play("scream")
 	set_velocity(Vector3(0, get_velocity().y, 0))
 
 func _process(_delta: float) -> void:

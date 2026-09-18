@@ -18,7 +18,10 @@ func _init() -> void:
 	update_text()
 
 func _on_timer_timeout() -> void:
-	if (not Mother.get_singleton().is_broken() and __index + 1 < __text_arr.size()):
+	if (
+		Main.get_singleton().get_state() == Consts.State.GAME_STATE
+		and not Mother.get_singleton().is_broken() and __index + 1 < __text_arr.size()
+	):
 		__index = __index + 1
 		update_text()
 

@@ -57,17 +57,18 @@ func _physics_process(_delta: float) -> void:
 	super(_delta)
 
 func _process(_delta: float) -> void:
-	if (Input.is_action_just_released("right") or Input.is_action_just_released("down")):
-		get_anim_player().play("front")
-	elif (Input.is_action_just_released("left") or Input.is_action_just_released("up")):
-		get_anim_player().play("back")
+	if (Main.get_singleton().get_state() == Consts.State.GAME_STATE):
+		if (Input.is_action_just_released("right") or Input.is_action_just_released("down")):
+			get_anim_player().play("front")
+		elif (Input.is_action_just_released("left") or Input.is_action_just_released("up")):
+			get_anim_player().play("back")
 
-	if (Input.is_action_pressed("right") or Input.is_action_pressed("down")):
-		get_sprite().set_flip_h(Input.is_action_pressed("down"))
-		get_anim_player().play("front_walk")
-	elif (Input.is_action_pressed("left") or Input.is_action_pressed("up")):
-		get_sprite().set_flip_h(Input.is_action_pressed("up"))
-		get_anim_player().play("back_walk")
+		if (Input.is_action_pressed("right") or Input.is_action_pressed("down")):
+			get_sprite().set_flip_h(Input.is_action_pressed("down"))
+			get_anim_player().play("front_walk")
+		elif (Input.is_action_pressed("left") or Input.is_action_pressed("up")):
+			get_sprite().set_flip_h(Input.is_action_pressed("up"))
+			get_anim_player().play("back_walk")
 
 func get_input_vector() -> Vector2:
 	return __input_vector

@@ -40,7 +40,7 @@ func _init() -> void:
 	print("https://godotengine.org/license")
 
 func _ready() -> void:
-	set_state(Consts.State.GAME_STATE)
+	set_state(Consts.State.TITLE_STATE)
 
 func _notification(what: int) -> void:
 	match what:
@@ -54,6 +54,12 @@ func _notification(what: int) -> void:
 func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("fullscreen")):
 		set_fullscreen(not __fullscreen)
+
+	if (get_state() == Consts.State.TITLE_STATE and (
+		Input.is_action_just_pressed("confirm")
+		or Input.is_action_just_pressed("click")
+	)):
+		set_state(Consts.State.GAME_STATE)
 
 func set_fullscreen(val: bool) -> void:
 	__fullscreen = val
@@ -73,8 +79,18 @@ func set_state(val: Consts.State) -> void:
 			__map.add_child(Mother.get_singleton())
 			__map.add_child(TextBox.get_singleton())
 
+		Consts.State.ENDING_STATE:
+			TextBox.get_singleton().set_text("")
+
 func get_state() -> Consts.State:
 	return __state
+
+func init_ending(ending: Consts.Ending) -> void:
+	set_state(Consts.State.ENDING_STATE)
+
+	match ending:
+		_:
+			pass
 
 func exit(err: Error = Error.OK) -> void:
 	queue_free()
