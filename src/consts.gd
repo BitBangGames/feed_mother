@@ -120,7 +120,7 @@ const TEXT_THREE_EGGS: PackedStringArray = [
 	"Stand on top of her great figure.",
 	"Do not do anything else.",
 	"You do not need to do anything else.",
-	"Stand on Mother, and this game will be over.",
+	"Stand on Mother, and your life will be complete.",
 	"She does not need four eggs.",
 	"Or five, or six, or the rest.",
 	"Everyone is believing in you.",
