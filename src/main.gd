@@ -80,6 +80,8 @@ func set_state(val: Consts.State) -> void:
 			__map.add_child(TextBox.get_singleton())
 
 		Consts.State.ENDING_STATE:
+			Player.get_singleton().set_velocity(Vector3(0, 0, 0))
+			Player.get_singleton().get_anim_player().play("front")
 			TextBox.get_singleton().set_text("")
 
 func get_state() -> Consts.State:

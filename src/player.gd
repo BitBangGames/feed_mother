@@ -34,8 +34,12 @@ func _physics_process(_delta: float) -> void:
 		for i: int in get_slide_collision_count():
 			var collision: KinematicCollision3D = get_slide_collision(i)
 
-			if (collision.get_collider() is Unit and not (collision.get_collider() as Unit).is_broken()):
-				var collider: Unit = collision.get_collider()
+			if (collision.get_collider() is Mother and (collision.get_collider() as Unit).is_broken()):
+				(collision.get_collider() as Node).queue_free()
+				Main.get_singleton().init_ending(Consts.Ending.DEVOUR_ENDING)
+
+			elif (collision.get_collider() is Unit):
+				var collider: Unit = collision.get_collider() as Unit
 				if (collider is Mother):
 					collider.set_velocity(Vector3(
 						get_input_vector().x,
