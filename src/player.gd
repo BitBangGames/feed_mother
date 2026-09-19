@@ -19,7 +19,9 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if (Main.get_singleton().get_state() == Consts.State.GAME_STATE):
-
+		if (get_position().y < 0):
+			await Main.get_singleton().init_ending(Consts.Ending.FALL_ENDING)
+			
 		set_input_vector(Input.get_vector("left", "right", "up", "down"))
 
 		if (is_on_floor() and Input.is_action_just_pressed("confirm")):
@@ -36,7 +38,7 @@ func _physics_process(_delta: float) -> void:
 
 			if (collision.get_collider() is Mother and (collision.get_collider() as Unit).is_broken()):
 				(collision.get_collider() as Node).queue_free()
-				Main.get_singleton().init_ending(Consts.Ending.DEVOUR_ENDING)
+				await Main.get_singleton().init_ending(Consts.Ending.DEVOUR_ENDING)
 
 			elif (collision.get_collider() is Unit):
 				var collider: Unit = collision.get_collider() as Unit
@@ -46,6 +48,10 @@ func _physics_process(_delta: float) -> void:
 						collider.get_velocity().y,
 						get_input_vector().y
 					))
+
+					if (is_standing_on(collider)):
+						await Main.get_singleton().init_ending(Consts.Ending.FEED_ENDING)
+
 				else:
 					collider.set_velocity(Vector3(
 						get_input_vector().x*(Consts.SPEED >> 1),

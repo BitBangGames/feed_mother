@@ -22,6 +22,7 @@ static var __singleton: Main = null
 var __fullscreen: bool = true
 var __map: StaticBody3D
 var __state: Consts.State
+var __endings: PackedByteArray = [false, false, false]
 
 static func get_singleton() -> Main:
 	if (__singleton == null):
@@ -80,7 +81,7 @@ func set_state(val: Consts.State) -> void:
 			__map.add_child(TextBox.get_singleton())
 
 		Consts.State.ENDING_STATE:
-			Player.get_singleton().set_velocity(Vector3(0, 0, 0))
+			Player.get_singleton().set_velocity(Vector3(0, Player.get_singleton().get_vel_y(), 0))
 			Player.get_singleton().get_anim_player().play("front")
 			TextBox.get_singleton().set_text("")
 
@@ -89,11 +90,34 @@ func get_state() -> Consts.State:
 
 func init_ending(ending: Consts.Ending) -> void:
 	set_state(Consts.State.ENDING_STATE)
-
 	match ending:
-		_:
-			pass
+		Consts.Ending.FEED_ENDING:
+			Mother.get_singleton().get_anim_player().play("mouth_open")
+			await get_tree().create_timer(2.0).timeout
+			Mother.get_singleton().get_anim_player().play("laugh")
+
+			await get_tree().create_timer(4.0).timeout
+			set_state(Consts.State.TITLE_STATE)
+
+		Consts.Ending.FALL_ENDING:
+			Mother.get_singleton().get_anim_player().play("eye_open")
+			await get_tree().create_timer(2.0).timeout
+
+			for canvas_item: CanvasItem in get_node(Consts.MAP_CANVAS_PATH).get_children():
+				if not (canvas_item.is_visible()):
+					canvas_item.set_visible(true)
+
+	if (ending != Consts.Ending.TRUE_ENDING):
+		__endings[ending] = true
+
+		await get_tree().create_timer(8.0).timeout
+		__map.queue_free()
+		set_state(Consts.State.TITLE_STATE)
 
 func exit(err: Error = Error.OK) -> void:
 	queue_free()
 	get_tree().quit(err)
+
+
+func _on_timer_timeout() -> void:
+	pass # Replace with function body.

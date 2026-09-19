@@ -57,17 +57,14 @@ shape = SubResource("BoxShape3D_hgrid")
 
 [node name="MapCanvas" parent="." unique_id=557316898 instance=ExtResource("1_hgrid")]
 
-[node name="Egg" parent="." unique_id=1567905165 instance=ExtResource("2_a0dt8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 96, 12)
-
-[node name="Egg2" parent="." unique_id=2002394570 instance=ExtResource("2_a0dt8")]
+[node name="Egg" parent="." unique_id=2002394570 instance=ExtResource("2_a0dt8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 96, 24)
 
-[node name="Egg3" parent="." unique_id=980921115 instance=ExtResource("2_a0dt8")]
+[node name="Egg2" parent="." unique_id=980921115 instance=ExtResource("2_a0dt8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 96, 48)
 
-[node name="Egg4" parent="." unique_id=1276689914 instance=ExtResource("2_a0dt8")]
+[node name="Egg3" parent="." unique_id=1276689914 instance=ExtResource("2_a0dt8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 96, 12)
 
-[node name="Egg5" parent="." unique_id=643577473 instance=ExtResource("2_a0dt8")]
+[node name="Egg4" parent="." unique_id=643577473 instance=ExtResource("2_a0dt8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 96, 60)
