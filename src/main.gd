@@ -142,6 +142,9 @@ func play_music(idx: int, speed: float = 1.0) -> void:
 	__music_player.set_pitch_scale(speed)
 	__music_player.play()
 
+func stop_music() -> void:
+	__music_player.set_stream_paused(true)
+
 func exit(err: Error = Error.OK) -> void:
 	queue_free()
 	get_tree().quit(err)
