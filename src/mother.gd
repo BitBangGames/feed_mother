@@ -46,15 +46,18 @@ func set_broken(val: bool) -> void:
 func get_eggs() -> int:
 	return __eggs
 
-func feed_mother() -> void:
+func increment_eggs() -> void:
 	__eggs = __eggs + 1
-	if (__eggs > 0b11):
+
+func feed_mother() -> void:
+	increment_eggs()
+	if (get_eggs() > 0b11):
 		set_broken(true)
 		return
 
 	get_anim_player().play("eye_open")
 	__timer.start()
-	if (__eggs == 0b11):
+	if (get_eggs() == 0b11):
 		__timer.set_paused(true)
 
-	TextBox.get_singleton().set_text_arr(__eggs)
+	TextBox.get_singleton().set_text_arr(get_eggs())

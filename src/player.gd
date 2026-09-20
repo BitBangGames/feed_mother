@@ -36,31 +36,32 @@ func _physics_process(_delta: float) -> void:
 		for i: int in get_slide_collision_count():
 			var collision: KinematicCollision3D = get_slide_collision(i)
 
-			if (collision.get_collider() is Mother and (collision.get_collider() as Unit).is_broken()):
-				(collision.get_collider() as Node).queue_free()
-				await Main.get_singleton().init_ending(Consts.Ending.DEVOUR_ENDING)
+			if (collision):
+				if (collision.get_collider() is Mother and (collision.get_collider() as Unit).is_broken()):
+					(collision.get_collider() as Node).queue_free()
+					await Main.get_singleton().init_ending(Consts.Ending.DEVOUR_ENDING)
 
-			elif (collision.get_collider() is Unit):
-				var collider: Unit = collision.get_collider() as Unit
-				if (collider is Mother):
-					collider.set_velocity(Vector3(
-						get_input_vector().x,
-						collider.get_velocity().y,
-						get_input_vector().y
-					))
+				elif (collision.get_collider() is Unit):
+					var collider: Unit = collision.get_collider() as Unit
+					if (collider is Mother):
+						collider.set_velocity(Vector3(
+							get_input_vector().x,
+							collider.get_velocity().y,
+							get_input_vector().y
+						))
 
-					if (is_standing_on(collider)):
-						await Main.get_singleton().init_ending(Consts.Ending.FEED_ENDING)
+						if (is_standing_on(collider) and (collider as Mother).get_eggs() == 0b11):
+							await Main.get_singleton().init_ending(Consts.Ending.FEED_ENDING)
 
-				else:
-					collider.set_velocity(Vector3(
-						get_input_vector().x*(Consts.SPEED >> 1),
-						collider.get_velocity().y,
-						get_input_vector().y*(Consts.SPEED >> 1)
-					))
+					else:
+						collider.set_velocity(Vector3(
+							get_input_vector().x*(Consts.SPEED >> 1),
+							collider.get_velocity().y,
+							get_input_vector().y*(Consts.SPEED >> 1)
+						))
 
-					if (is_standing_on(collider)):
-						collider.set_broken(true)
+						if (is_standing_on(collider)):
+							collider.set_broken(true)
 
 	update_z_index()
 
