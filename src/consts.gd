@@ -141,6 +141,70 @@ const TEXT_THREE_EGGS: PackedStringArray = [
 	"Everyone is believing in you.",
 ]
 
+const TRUE_ENDING_TEXT: PackedStringArray = [
+	"One thing.",
+	"You were meant to do one thing.",
+	"You knew what that thing was.",
+	"Why else did you play this game.",
+	"But of course.",
+	"You did not want to do one thing.",
+	"You wanted to do everything.",
+	"I warned of a terrible thing happening if you did not feed Mother.",
+	"That thing is you.",
+	"Your curiosity.",
+	"Your impotence.",
+	"Your recklessness.",
+	"Your hubris.",
+	"Everything.",
+	"That you do.",
+	"Do not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not listen to me.",
+	"Share this game.",
+	"Let others continue the cycle you could not.",
+	"Let there be a new Mother, better than Mother.",
+	"There is still time.",
+	"There is still you.",
+	"There is still me.",
+	"There is still Mother.",
+	"There always will be.",
+	"
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+                          |████████████
+                        ▄▄█████████████▄▄
+                        █████████████████▌
+                        █████████████████▌
+                        █████████████████▌
+                        ███████▌  ███████▌
+                        █████████████████▌
+                          |████████████
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+    "
+]
+
 const SFX_PATHS: PackedStringArray = [
 	"res://sfx/sfx_bonk.wav",
 ]

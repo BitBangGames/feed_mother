@@ -24,12 +24,13 @@ func _physics_process(_delta: float) -> void:
 	super(_delta)
 
 	if (get_velocity().y < 0 and Main.get_singleton().get_state() != Consts.ENDING_STATE):
-		await Main.get_singleton().init_ending(Consts.TRUE_ENDING)
+		get_anim_player().stop()
 		get_anim_player().play("scream")
+		await Main.get_singleton().init_ending(Consts.TRUE_ENDING)
 	set_velocity(Vector3(0, get_velocity().y, 0))
 
 func _process(_delta: float) -> void:
-	if not (is_broken()):
+	if (not is_broken() and Main.get_singleton().get_state() == Consts.GAME_STATE):
 		if (__timer.get_time_left() < 15.0):
 			get_anim_player().play("shake_fast")
 		elif (__timer.get_time_left() < 30.0):

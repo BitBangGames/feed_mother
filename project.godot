@@ -20,7 +20,7 @@ run/delta_smoothing=false
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/stretch_mode=0
-config/icon="res://icon.svg"
+config/icon="uid://bg3f5r5gl7mtk"
 
 [audio]
 

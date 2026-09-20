@@ -126,6 +126,10 @@ func init_ending(ending: int) -> void:
 					canvas_item.set_visible(true)
 
 		Consts.TRUE_ENDING:
+			var readme: FileAccess = FileAccess.open("user://README", FileAccess.WRITE_READ)
+			for i: int in Consts.TRUE_ENDING_TEXT.size():
+				if not (readme.store_string(Consts.TRUE_ENDING_TEXT[i] + "\n\n")):
+					break
 			await get_tree().create_timer(8.0).timeout
 			var err: Error = OS.shell_open(ProjectSettings.globalize_path("user://"))
 			if (err):
