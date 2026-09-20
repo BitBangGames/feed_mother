@@ -18,9 +18,9 @@ func _ready() -> void:
 	set_sprite(preload("res://src/player_sprite.tscn").instantiate() as Sprite2D)
 
 func _physics_process(_delta: float) -> void:
-	if (Main.get_singleton().get_state() == Consts.State.GAME_STATE):
+	if (Main.get_singleton().get_state() == Consts.GAME_STATE):
 		if (get_position().y < 0):
-			await Main.get_singleton().init_ending(Consts.Ending.FALL_ENDING)
+			await Main.get_singleton().init_ending(Consts.FALL_ENDING)
 			
 		set_input_vector(Input.get_vector("left", "right", "up", "down"))
 
@@ -39,7 +39,7 @@ func _physics_process(_delta: float) -> void:
 			if (collision):
 				if (collision.get_collider() is Mother and (collision.get_collider() as Unit).is_broken()):
 					(collision.get_collider() as Node).queue_free()
-					await Main.get_singleton().init_ending(Consts.Ending.DEVOUR_ENDING)
+					await Main.get_singleton().init_ending(Consts.DEVOUR_ENDING)
 
 				elif (collision.get_collider() is Unit):
 					var collider: Unit = collision.get_collider() as Unit
@@ -51,7 +51,7 @@ func _physics_process(_delta: float) -> void:
 						))
 
 						if (is_standing_on(collider) and (collider as Mother).get_eggs() == 0b11):
-							await Main.get_singleton().init_ending(Consts.Ending.FEED_ENDING)
+							await Main.get_singleton().init_ending(Consts.FEED_ENDING)
 
 					else:
 						collider.set_velocity(Vector3(
@@ -67,8 +67,11 @@ func _physics_process(_delta: float) -> void:
 
 	super(_delta)
 
+	if (just_collided()):
+		Main.get_singleton().play_sound(Consts.SFX_BONK)
+
 func _process(_delta: float) -> void:
-	if (Main.get_singleton().get_state() == Consts.State.GAME_STATE):
+	if (Main.get_singleton().get_state() == Consts.GAME_STATE):
 		if (Input.is_action_just_released("right") or Input.is_action_just_released("down")):
 			get_anim_player().play("front")
 		elif (Input.is_action_just_released("left") or Input.is_action_just_released("up")):

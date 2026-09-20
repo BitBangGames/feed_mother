@@ -1,10 +1,25 @@
 extends Node
 
+enum {
+	TITLE_STATE,
+	GAME_STATE,
+	ENDING_STATE,
+}
+
+enum {
+	FEED_ENDING,
+	DEVOUR_ENDING,
+	FALL_ENDING,
+	TRUE_ENDING,
+}
+
+enum {
+	SFX_BONK,
+}
+
 const SPEED: int = 0b110000
 const JUMP_HEIGHT: int = 0b10000000
 const ACCEL_Y: int = 0b1000
-
-const WORLD_SIZE: int = 0b1100000
 
 const MAP_CANVAS_PATH: NodePath = "/root/Main/Map/MapCanvas"
 
@@ -126,15 +141,14 @@ const TEXT_THREE_EGGS: PackedStringArray = [
 	"Everyone is believing in you.",
 ]
 
-enum State {
-	TITLE_STATE,
-	GAME_STATE,
-	ENDING_STATE,
-}
+const SFX_PATHS: PackedStringArray = [
+	"res://sfx/sfx_bonk.wav",
+]
 
-enum Ending {
-	FEED_ENDING,
-	DEVOUR_ENDING,
-	FALL_ENDING,
-	TRUE_ENDING,
-}
+const MUSIC_PATHS: PackedStringArray = [
+
+]
+
+const MUSIC_LOOPS: PackedFloat32Array = [
+
+]

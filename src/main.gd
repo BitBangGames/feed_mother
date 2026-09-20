@@ -21,8 +21,11 @@ static var __singleton: Main = null
 
 var __fullscreen: bool = true
 var __map: StaticBody3D
-var __state: Consts.State
+var __state: int
 var __endings: PackedByteArray = [false, false, false]
+
+var __sound_player: AudioStreamPlayer = AudioStreamPlayer.new()
+var __music_player: AudioStreamPlayer = AudioStreamPlayer.new()
 
 static func get_singleton() -> Main:
 	if (__singleton == null):
@@ -36,12 +39,15 @@ func _init() -> void:
 
 	__singleton = self
 
+	add_child(__sound_player)
+	add_child(__music_player)
+
 	print("Feed Mother by Bit Bang Games")
 	print("Source code: https://github.com/BitBangGames/feed_mother")
 	print("https://godotengine.org/license")
 
 func _ready() -> void:
-	set_state(Consts.State.TITLE_STATE)
+	set_state(Consts.TITLE_STATE)
 
 func _notification(what: int) -> void:
 	match what:
@@ -56,11 +62,11 @@ func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("fullscreen")):
 		set_fullscreen(not __fullscreen)
 
-	if (get_state() == Consts.State.TITLE_STATE and (
+	if (get_state() == Consts.TITLE_STATE and (
 		Input.is_action_just_pressed("confirm")
 		or Input.is_action_just_pressed("click")
 	)):
-		set_state(Consts.State.GAME_STATE)
+		set_state(Consts.GAME_STATE)
 
 func set_fullscreen(val: bool) -> void:
 	__fullscreen = val
@@ -69,10 +75,10 @@ func set_fullscreen(val: bool) -> void:
 		else DisplayServer.WINDOW_MODE_WINDOWED
 	)
 
-func set_state(val: Consts.State) -> void:
+func set_state(val: int) -> void:
 	__state = val
 	match val:
-		Consts.State.TITLE_STATE:
+		Consts.TITLE_STATE:
 			if (__map):
 				__map.queue_free()
 			add_child(preload("res://src/title_screen.tscn").instantiate())
@@ -80,7 +86,7 @@ func set_state(val: Consts.State) -> void:
 				"Endings: " + str(__endings.count(true)) + "/4"
 			)
 
-		Consts.State.GAME_STATE:
+		Consts.GAME_STATE:
 			get_node("./TitleScreen").queue_free()
 			__map = preload("res://map/map.tscn").instantiate()
 			add_child(__map)
@@ -89,26 +95,26 @@ func set_state(val: Consts.State) -> void:
 			__map.add_child(Mother.get_singleton())
 			__map.add_child(TextBox.get_singleton())
 
-		Consts.State.ENDING_STATE:
+		Consts.ENDING_STATE:
 			Player.get_singleton().set_velocity(Vector3(0, Player.get_singleton().get_vel_y(), 0))
 			Player.get_singleton().get_anim_player().play("front")
 			TextBox.get_singleton().set_text("")
 
-func get_state() -> Consts.State:
+func get_state() -> int:
 	return __state
 
-func init_ending(ending: Consts.Ending) -> void:
-	set_state(Consts.State.ENDING_STATE)
+func init_ending(ending: int) -> void:
+	set_state(Consts.ENDING_STATE)
 	match ending:
-		Consts.Ending.FEED_ENDING:
+		Consts.FEED_ENDING:
 			Mother.get_singleton().get_anim_player().play("mouth_open")
 			await get_tree().create_timer(2.0).timeout
 			Mother.get_singleton().get_anim_player().play("laugh")
 
-		Consts.Ending.DEVOUR_ENDING:
+		Consts.DEVOUR_ENDING:
 			Player.get_singleton().get_anim_player().play("devour")
 
-		Consts.Ending.FALL_ENDING:
+		Consts.FALL_ENDING:
 			Mother.get_singleton().get_anim_player().play("eye_open")
 			await get_tree().create_timer(2.0).timeout
 
@@ -116,11 +122,25 @@ func init_ending(ending: Consts.Ending) -> void:
 				if not (canvas_item.is_visible()):
 					canvas_item.set_visible(true)
 
-	if (ending != Consts.Ending.TRUE_ENDING):
+	if (ending != Consts.TRUE_ENDING):
 		__endings[ending] = true
 
 		await get_tree().create_timer(4.0).timeout
-		set_state(Consts.State.TITLE_STATE)
+		set_state(Consts.TITLE_STATE)
+
+func play_sound(idx: int, speed: float = 1.0) -> void:
+	var stream: AudioStreamWAV = load(Consts.SFX_PATHS[idx])
+	__sound_player.set_stream(stream)
+	__sound_player.set_pitch_scale(speed)
+	__sound_player.play()
+	
+func play_music(idx: int, speed: float = 1.0) -> void:
+	var stream: AudioStreamOggVorbis = load(Consts.MUSIC_PATHS[idx])
+	stream.set_loop(true)
+	stream.set_loop_offset(Consts.MUSIC_LOOPS[idx])
+	__music_player.set_stream(stream)
+	__music_player.set_pitch_scale(speed)
+	__music_player.play()
 
 func exit(err: Error = Error.OK) -> void:
 	queue_free()

@@ -41,7 +41,7 @@ text = "Endings: TREE(3)/4"
 label_settings = ExtResource("1_whxi8")
 horizontal_alignment = 2
 
-[node name="Control" type="Control" parent="." unique_id=64379571]
+[node name="Conway" type="Control" parent="." unique_id=64379571]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -53,6 +53,6 @@ offset_bottom = 8.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="Conway" type="Sprite2D" parent="Control" unique_id=383557447]
+[node name="Sprite2D" type="Sprite2D" parent="Conway" unique_id=383557447]
 position = Vector2(-4, -4)
 texture = ExtResource("2_mx57q")
