@@ -105,6 +105,9 @@ func init_ending(ending: Consts.Ending) -> void:
 			await get_tree().create_timer(2.0).timeout
 			Mother.get_singleton().get_anim_player().play("laugh")
 
+		Consts.Ending.DEVOUR_ENDING:
+			Player.get_singleton().get_anim_player().play("devour")
+
 		Consts.Ending.FALL_ENDING:
 			Mother.get_singleton().get_anim_player().play("eye_open")
 			await get_tree().create_timer(2.0).timeout
