@@ -23,7 +23,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	super(_delta)
 
-	if (get_velocity().y < 0):
+	if (get_velocity().y < 0 and Main.get_singleton().get_state() != Consts.ENDING_STATE):
 		await Main.get_singleton().init_ending(Consts.TRUE_ENDING)
 		get_anim_player().play("scream")
 	set_velocity(Vector3(0, get_velocity().y, 0))

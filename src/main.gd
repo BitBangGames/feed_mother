@@ -125,6 +125,12 @@ func init_ending(ending: int) -> void:
 				if not (canvas_item.is_visible()):
 					canvas_item.set_visible(true)
 
+		Consts.TRUE_ENDING:
+			await get_tree().create_timer(8.0).timeout
+			var err: Error = OS.shell_open(ProjectSettings.globalize_path("user://"))
+			if (err):
+				exit(err)
+
 	if (ending != Consts.TRUE_ENDING):
 		__endings[ending] = true
 
