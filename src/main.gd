@@ -72,7 +72,16 @@ func set_fullscreen(val: bool) -> void:
 func set_state(val: Consts.State) -> void:
 	__state = val
 	match val:
+		Consts.State.TITLE_STATE:
+			if (__map):
+				__map.queue_free()
+			add_child(preload("res://src/title_screen.tscn").instantiate())
+			(get_node("./TitleScreen/EndingsBox") as Label).set_text(
+				"Endings: " + str(__endings.count(true)) + "/4"
+			)
+
 		Consts.State.GAME_STATE:
+			get_node("./TitleScreen").queue_free()
 			__map = preload("res://map/map.tscn").instantiate()
 			add_child(__map)
 
@@ -96,9 +105,6 @@ func init_ending(ending: Consts.Ending) -> void:
 			await get_tree().create_timer(2.0).timeout
 			Mother.get_singleton().get_anim_player().play("laugh")
 
-			await get_tree().create_timer(4.0).timeout
-			set_state(Consts.State.TITLE_STATE)
-
 		Consts.Ending.FALL_ENDING:
 			Mother.get_singleton().get_anim_player().play("eye_open")
 			await get_tree().create_timer(2.0).timeout
@@ -110,8 +116,7 @@ func init_ending(ending: Consts.Ending) -> void:
 	if (ending != Consts.Ending.TRUE_ENDING):
 		__endings[ending] = true
 
-		await get_tree().create_timer(8.0).timeout
-		__map.queue_free()
+		await get_tree().create_timer(4.0).timeout
 		set_state(Consts.State.TITLE_STATE)
 
 func exit(err: Error = Error.OK) -> void:
