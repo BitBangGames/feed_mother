@@ -122,7 +122,3 @@ func init_ending(ending: Consts.Ending) -> void:
 func exit(err: Error = Error.OK) -> void:
 	queue_free()
 	get_tree().quit(err)
-
-
-func _on_timer_timeout() -> void:
-	pass # Replace with function body.
