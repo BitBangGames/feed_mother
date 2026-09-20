@@ -13,7 +13,8 @@ func _physics_process(_delta: float) -> void:
 		if (
 			collision.get_collider() is Mother
 			and not Mother.get_singleton().is_broken()
-			and not is_broken()):
+			and not is_broken()
+		):
 			Mother.get_singleton().feed_mother()
 			queue_free()
 

@@ -104,7 +104,9 @@ func get_state() -> int:
 	return __state
 
 func init_ending(ending: int) -> void:
+	stop_music()
 	set_state(Consts.ENDING_STATE)
+
 	match ending:
 		Consts.FEED_ENDING:
 			Mother.get_singleton().get_anim_player().play("mouth_open")
@@ -113,6 +115,7 @@ func init_ending(ending: int) -> void:
 
 		Consts.DEVOUR_ENDING:
 			Player.get_singleton().get_anim_player().play("devour")
+			await get_tree().create_timer(2.0).timeout
 
 		Consts.FALL_ENDING:
 			Mother.get_singleton().get_anim_player().play("eye_open")
