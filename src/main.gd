@@ -135,7 +135,7 @@ func init_ending(ending: int) -> void:
 
 			if (OS.get_name() == "Web"):
 				JavaScriptBridge.download_buffer(
-					FileAccess.get_file_as_bytes(Consts.README_PATH), "README"
+					FileAccess.get_file_as_bytes(Consts.README_PATH), "README", "text/plain"
 				)
 			else:
 				var err: Error = OS.shell_open(ProjectSettings.globalize_path("user://"))
