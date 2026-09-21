@@ -126,14 +126,23 @@ func init_ending(ending: int) -> void:
 					canvas_item.set_visible(true)
 
 		Consts.TRUE_ENDING:
-			var readme: FileAccess = FileAccess.open("user://README", FileAccess.WRITE_READ)
-			for i: int in Consts.TRUE_ENDING_TEXT.size():
-				if not (readme.store_string(Consts.TRUE_ENDING_TEXT[i] + "\n\n")):
+			var readme: FileAccess = FileAccess.open(Consts.README_PATH, FileAccess.WRITE_READ)
+			for i: int in Consts.README_TEXT.size():
+				if not (readme.store_string(Consts.README_TEXT[i] + "\n\n")):
+					printerr(Consts.README_TEXT[i])
 					break
 			await get_tree().create_timer(8.0).timeout
-			var err: Error = OS.shell_open(ProjectSettings.globalize_path("user://"))
-			if (err):
-				exit(err)
+
+			if (OS.get_name() == "Web"):
+				JavaScriptBridge.download_buffer(
+					FileAccess.get_file_as_bytes(Consts.README_PATH), "README"
+				)
+			else:
+				var err: Error = OS.shell_open(ProjectSettings.globalize_path("user://"))
+				if (err):
+					exit(err)
+
+			exit()
 
 	if (ending != Consts.TRUE_ENDING):
 		__endings[ending] = true

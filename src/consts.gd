@@ -141,7 +141,7 @@ const TEXT_THREE_EGGS: PackedStringArray = [
 	"Everyone is believing in you.",
 ]
 
-const TRUE_ENDING_TEXT: PackedStringArray = [
+const README_TEXT: PackedStringArray = [
 	"One thing.",
 	"You were meant to do one thing.",
 	"You knew what that thing was.",
@@ -158,7 +158,7 @@ const TRUE_ENDING_TEXT: PackedStringArray = [
 	"Everything.",
 	"That you do.",
 	"Do not close this message.",
-	"Do not not not attempt to continue this software.",
+	"Do not not not remove this software.",
 	"Do not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not not listen to me.",
 	"Share this software.",
 	"Let others continue the cycle you would not.",
@@ -206,6 +206,8 @@ const TRUE_ENDING_TEXT: PackedStringArray = [
      
     "
 ]
+
+const README_PATH: String = "user://README"
 
 const SFX_PATHS: PackedStringArray = [
 	"res://sfx/sfx_bonk.wav",
