@@ -141,72 +141,68 @@ const TEXT_THREE_EGGS: PackedStringArray = [
 	"Everyone is believing in you.",
 ]
 
-const README_TEXT: PackedStringArray = [
-	"One thing.",
-	"You were meant to do one thing.",
-	"You knew what that thing was.",
-	"Why else would you run this software.",
-	"But of course.",
-	"You did not want to do one thing.",
-	"You wanted to do everything.",
-	"I warned of a terrible thing happening if you did not feed Mother.",
-	"That thing is you.",
-	"Your curiosity.",
-	"Your impotence.",
-	"Your recklessness.",
-	"Your hubris.",
-	"Everything.",
-	"That you do.",
-	"Do not close this message.",
-	"Do not not not remove this software.",
-	"Share this software.",
-	"Let others continue the cycle you would not.",
-	"Let there be a new Mother, better than Mother.",
-	"There is still time.",
-	"There is still you.",
-	"There is still me.",
-	"There is still Mother.",
-	"There always will be.",
-	"
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-                          |████████████
-                        ▄▄█████████████▄▄
-                        █████████████████▌
-                        █████████████████▌
-                        █████████████████▌
-                        ███████▌  ███████▌
-                        █████████████████▌
-                          |████████████
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     
-    "
-]
+const README_TEXT: StringName = \
+"One thing.
 
-const README_PATH: String = "user://README"
+You were meant to do one thing.
+
+You knew what that thing was.
+
+Why else would you run this software.
+
+But of course.
+
+You did not want to do one thing.
+
+You wanted to do everything.
+
+I warned of a terrible thing happening if you did not feed Mother.
+
+That thing is you.
+
+Your curiosity.
+
+Your impotence.
+
+Your recklessness.
+
+Your hubris.
+
+Everything.
+
+That you do.
+
+Do not close this message.
+
+Do not not not remove this software.
+
+Share this software.
+
+Let others continue the cycle you would not.
+
+Let there be a new Mother, better than Mother.
+
+There is still time.
+
+There is still you.
+
+There is still me.
+
+There is still Mother.
+
+There always will be.
+
+		  |████████████
+		▄▄█████████████▄▄
+		█████████████████▌
+		█████████████████▌
+		█████████████████▌
+		███████▌  ███████▌
+		█████████████████▌
+		  |████████████
+"
+
+const README_PATH: StringName = "user://README"
 
 const SFX_PATHS: PackedStringArray = [
 	"res://sfx/sfx_bonk.wav",

@@ -127,10 +127,8 @@ func init_ending(ending: int) -> void:
 
 		Consts.TRUE_ENDING:
 			var readme: FileAccess = FileAccess.open(Consts.README_PATH, FileAccess.WRITE_READ)
-			for i: int in Consts.README_TEXT.size():
-				if not (readme.store_string(Consts.README_TEXT[i] + "\n\n")):
-					printerr(Consts.README_TEXT[i])
-					break
+			if not (readme.store_string(Consts.README_TEXT)):
+				printerr("Failed to create README file")
 			await get_tree().create_timer(8.0).timeout
 
 			if (OS.get_name() == "Web"):
