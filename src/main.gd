@@ -114,6 +114,7 @@ func init_ending(ending: int) -> void:
 
 			play_sound(Consts.SFX_LAUGH)
 			Mother.get_singleton().get_anim_player().play("laugh")
+			await get_tree().create_timer(2.0).timeout
 
 		Consts.DEVOUR_ENDING:
 			play_sound(Consts.SFX_EATING)
@@ -133,7 +134,7 @@ func init_ending(ending: int) -> void:
 			var readme: FileAccess = FileAccess.open(Consts.README_PATH, FileAccess.WRITE_READ)
 			if not (readme.store_string(Consts.README_TEXT)):
 				printerr("Failed to create README file")
-			await get_tree().create_timer(12.0).timeout
+			await get_tree().create_timer(8.0).timeout
 
 			if (OS.get_name() == "Web"):
 				JavaScriptBridge.download_buffer(
@@ -149,7 +150,7 @@ func init_ending(ending: int) -> void:
 	if (ending != Consts.TRUE_ENDING):
 		__endings[ending] = true
 
-		await get_tree().create_timer(6.0).timeout
+		await get_tree().create_timer(4.0).timeout
 		set_state(Consts.TITLE_STATE)
 
 func play_sound(idx: int, speed: float = 1.0) -> void:
