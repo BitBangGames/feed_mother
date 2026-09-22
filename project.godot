@@ -93,6 +93,10 @@ mouse_cursor/custom_image="uid://48t0nu7hp0ei"
 
 movie_writer/disable_vsync=true
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gate/plugin.cfg")
+
 [input]
 
 confirm={
