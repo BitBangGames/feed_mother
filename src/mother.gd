@@ -26,6 +26,7 @@ func _physics_process(_delta: float) -> void:
 	if (get_velocity().y < 0 and Main.get_singleton().get_state() != Consts.ENDING_STATE):
 		get_anim_player().stop()
 		get_anim_player().play("scream")
+		Main.get_singleton().play_sound(Consts.SFX_SCREAM)
 		await Main.get_singleton().init_ending(Consts.TRUE_ENDING)
 	set_velocity(Vector3(0, get_velocity().y, 0))
 
@@ -51,6 +52,8 @@ func increment_eggs() -> void:
 	__eggs = __eggs + 1
 
 func feed_mother() -> void:
+	Main.get_singleton().play_sound(Consts.SFX_DING, 0.75)
+
 	increment_eggs()
 	if (get_eggs() > 0b11):
 		set_broken(true)

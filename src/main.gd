@@ -111,16 +111,20 @@ func init_ending(ending: int) -> void:
 		Consts.FEED_ENDING:
 			Mother.get_singleton().get_anim_player().play("mouth_open")
 			await get_tree().create_timer(2.0).timeout
+
+			play_sound(Consts.SFX_LAUGH)
 			Mother.get_singleton().get_anim_player().play("laugh")
 
 		Consts.DEVOUR_ENDING:
+			play_sound(Consts.SFX_EATING)
 			Player.get_singleton().get_anim_player().play("devour")
-			await get_tree().create_timer(2.0).timeout
+			await get_tree().create_timer(4.0).timeout
 
 		Consts.FALL_ENDING:
 			Mother.get_singleton().get_anim_player().play("eye_open")
 			await get_tree().create_timer(2.0).timeout
 
+			play_sound(Consts.SFX_BONK)
 			for canvas_item: CanvasItem in get_node(Consts.MAP_CANVAS_PATH).get_children():
 				if not (canvas_item.is_visible()):
 					canvas_item.set_visible(true)
@@ -129,7 +133,7 @@ func init_ending(ending: int) -> void:
 			var readme: FileAccess = FileAccess.open(Consts.README_PATH, FileAccess.WRITE_READ)
 			if not (readme.store_string(Consts.README_TEXT)):
 				printerr("Failed to create README file")
-			await get_tree().create_timer(8.0).timeout
+			await get_tree().create_timer(12.0).timeout
 
 			if (OS.get_name() == "Web"):
 				JavaScriptBridge.download_buffer(
@@ -145,7 +149,7 @@ func init_ending(ending: int) -> void:
 	if (ending != Consts.TRUE_ENDING):
 		__endings[ending] = true
 
-		await get_tree().create_timer(4.0).timeout
+		await get_tree().create_timer(6.0).timeout
 		set_state(Consts.TITLE_STATE)
 
 func play_sound(idx: int, speed: float = 1.0) -> void:

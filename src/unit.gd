@@ -58,8 +58,14 @@ func is_broken() -> bool:
 	return __broken
 
 func set_broken(val: bool) -> void:
+	if not (is_broken()):
+		get_sprite().set_frame(1)
+		if (self is Mother):
+			Main.get_singleton().play_sound(Consts.SFX_CRACK, 0.5)
+		else:
+			Main.get_singleton().play_sound(Consts.SFX_CRACK)
+		
 	__broken = val
-	get_sprite().set_frame(1)
 
 func update_z_index() -> void:
 	get_sprite().set_z_index(int(get_position().y) >> 0b11)

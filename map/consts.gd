@@ -19,7 +19,6 @@ enum {
 	SFX_DING,
 	SFX_EATING,
 	SFX_LAUGH,
-	SFX_SCREAM,
 }
 
 const SPEED: int = 0b110000
@@ -215,7 +214,6 @@ const SFX_PATHS: PackedStringArray = [
 	"res://sfx/sfx_ding.wav",
 	"res://sfx/sfx_eating.wav",
 	"res://sfx/sfx_laugh.wav",
-	"res://sfx/sfx_scream.wav",
 ]
 
 const MUSIC_PATHS: PackedStringArray = [
