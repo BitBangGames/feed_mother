@@ -16,6 +16,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	set_sprite(preload("res://src/player_sprite.tscn").instantiate() as Sprite2D)
+	super()
 
 func _physics_process(_delta: float) -> void:
 	if (Main.get_singleton().get_state() == Consts.GAME_STATE):

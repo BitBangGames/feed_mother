@@ -18,6 +18,7 @@ func _init() -> void:
 
 func _ready() -> void:
 	set_sprite(preload("res://src/mother_sprite.tscn").instantiate() as Sprite2D)
+	super()
 
 func _physics_process(_delta: float) -> void:
 	super(_delta)

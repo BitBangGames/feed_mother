@@ -7,13 +7,18 @@ var __collided_prev: bool
 var __vel_y: int
 var __broken: bool = false
 
-var __sprite: Sprite2D = null
+var __sprite: Sprite2D
+var __anim_player: AnimationPlayer
 
 static func isometric(cartesian: Vector3) -> Vector2:
 	return Vector2(
 		cartesian.x - cartesian.z,
 		0.5*(cartesian.x + cartesian.z) - cartesian.y
 	)
+
+func _ready() -> void:
+	if (get_sprite()):
+		__anim_player = get_sprite().get_node_or_null("AnimationPlayer")
 
 func _notification(what: int) -> void:
 	match what:
@@ -40,7 +45,7 @@ func get_sprite() -> Sprite2D:
 	return __sprite
 
 func get_anim_player() -> AnimationPlayer:
-	return get_sprite().get_child(0) if (get_sprite().get_child(0) is AnimationPlayer) else null
+	return __anim_player
 
 func set_vel_y(val: int) -> void:
 	__vel_y = val

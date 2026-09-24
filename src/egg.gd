@@ -3,6 +3,7 @@ extends Unit
 
 func _ready() -> void:
 	set_sprite(preload("res://src/egg_sprite.tscn").instantiate() as Sprite2D)
+	super()
 
 func _physics_process(_delta: float) -> void:
 	update_z_index()
