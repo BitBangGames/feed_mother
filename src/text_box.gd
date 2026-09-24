@@ -5,6 +5,7 @@ static var __singleton: TextBox = null
 
 var __text_arr: PackedStringArray
 var __index: int
+@onready var __timer: Timer = get_node("Timer")
 
 static func get_singleton() -> TextBox:
 	if (__singleton == null):
@@ -20,7 +21,8 @@ func _init() -> void:
 func _on_timer_timeout() -> void:
 	if (
 		Main.get_singleton().get_state() == Consts.GAME_STATE
-		and not Mother.get_singleton().is_broken() and __index + 1 < __text_arr.size()
+		and not Mother.get_singleton().is_broken()
+		and __index + 1 < __text_arr.size()
 	):
 		__index = __index + 1
 		update_text()
@@ -41,5 +43,5 @@ func set_text_arr(eggs: int) -> void:
 			return
 
 	__index = 0
-	(get_node("Timer") as Timer).start()
+	__timer.start()
 	update_text()

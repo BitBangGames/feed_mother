@@ -4,7 +4,7 @@ extends Unit
 static var __singleton: Mother = null
 
 var __eggs: int
-var __timer: Timer
+@onready var __timer: Timer = get_node("Timer")
 
 static func get_singleton() -> Mother:
 	if (__singleton == null):
@@ -17,7 +17,6 @@ func _init() -> void:
 	set_position(Vector3(80.0, 8.0, 80.0))
 
 func _ready() -> void:
-	__timer = get_node("Timer") as Timer
 	set_sprite(preload("res://src/mother_sprite.tscn").instantiate() as Sprite2D)
 
 func _physics_process(_delta: float) -> void:
