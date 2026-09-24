@@ -66,6 +66,7 @@ func set_broken(val: bool) -> void:
 	if not (is_broken()):
 		get_sprite().set_frame(1)
 		if (self is Mother):
+			Main.get_singleton().stop_music()
 			Main.get_singleton().play_sound(Consts.SFX_CRACK, 0.5)
 		else:
 			Main.get_singleton().play_sound(Consts.SFX_CRACK)

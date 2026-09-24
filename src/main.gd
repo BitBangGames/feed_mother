@@ -86,6 +86,8 @@ func set_state(val: int) -> void:
 				"Endings: " + str(__endings.count(true)) + "/4"
 			)
 
+			play_music(Consts.MUS_HEARTBEAT)
+
 		Consts.GAME_STATE:
 			get_node("./TitleScreen").queue_free()
 			__map = preload("res://map/map.tscn").instantiate()
@@ -94,6 +96,8 @@ func set_state(val: int) -> void:
 			__map.add_child(Player.get_singleton())
 			__map.add_child(Mother.get_singleton())
 			__map.add_child(TextBox.get_singleton())
+
+			play_music(Consts.MUS_MOTHER)
 
 		Consts.ENDING_STATE:
 			Player.get_singleton().set_velocity(Vector3(0, Player.get_singleton().get_vel_y(), 0))
@@ -122,13 +126,16 @@ func init_ending(ending: int) -> void:
 			await get_tree().create_timer(4.0).timeout
 
 		Consts.FALL_ENDING:
-			Mother.get_singleton().get_anim_player().play("eye_open")
+			if not (Mother.get_singleton().is_broken()):
+				Mother.get_singleton().get_anim_player().play("eye_open")
 			await get_tree().create_timer(2.0).timeout
 
 			play_sound(Consts.SFX_BONK)
 			for canvas_item: CanvasItem in get_node(Consts.MAP_CANVAS_PATH).get_children():
 				if not (canvas_item.is_visible()):
 					canvas_item.set_visible(true)
+				elif (canvas_item is Sprite2D):
+					canvas_item.set_visible(false)
 
 		Consts.TRUE_ENDING:
 			var readme: FileAccess = FileAccess.open(Consts.README_PATH, FileAccess.WRITE_READ)
@@ -161,8 +168,6 @@ func play_sound(idx: int, speed: float = 1.0) -> void:
 	
 func play_music(idx: int, speed: float = 1.0) -> void:
 	var stream: AudioStreamOggVorbis = load(Consts.MUSIC_PATHS[idx])
-	stream.set_loop(true)
-	stream.set_loop_offset(Consts.MUSIC_LOOPS[idx])
 	__music_player.set_stream(stream)
 	__music_player.set_pitch_scale(speed)
 	__music_player.play()

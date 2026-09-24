@@ -22,7 +22,12 @@ enum {
 	SFX_SCREAM,
 }
 
-const SPEED: int = 0b110000
+enum {
+	MUS_HEARTBEAT,
+	MUS_MOTHER,
+}
+
+const SPEED: int = 0b100000
 const JUMP_HEIGHT: int = 0b10000000
 const ACCEL_Y: int = 0b1000
 
@@ -48,7 +53,7 @@ const TEXT_NO_EGGS: PackedStringArray = [
 	"Do not break the eggs.",
 	"Do not make Mother starve.",
 	"Do not ask any questions.",
-	"Do not try to escape from this room.",
+	"Do not exit this room.",
 	"Do not do anything.",
 	"If the thing you are doing.",
 	"Is not feeding Mother.",
@@ -106,8 +111,8 @@ const TEXT_TWO_EGGS: PackedStringArray = [
 	"Do not not feed Mother.",
 	"Do not not not not heed my warnings.",
 	"Do not not not not not not not.",
-	"Not not not not not not not not not not.",
-	"Try to leave this room with four walls.",
+	"Not not not not not not not not not not not.",
+	"Not exit this room with four walls.",
 	"In it.",
 	"And definitely don'tn'tn'tn'tn'tn't.",
 	"N't die.",
@@ -219,9 +224,6 @@ const SFX_PATHS: PackedStringArray = [
 ]
 
 const MUSIC_PATHS: PackedStringArray = [
-
-]
-
-const MUSIC_LOOPS: PackedFloat32Array = [
-
+	"res://mus/mus_heartbeat.ogg",
+	"res://mus/mus_mother.ogg",
 ]
