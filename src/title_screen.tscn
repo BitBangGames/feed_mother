@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://05xr0j2o1g8k"]
 
-[ext_resource type="LabelSettings" uid="uid://cwd2h0pgu7vpf" path="res://src/label_settings.tres" id="1_whxi8"]
+[ext_resource type="LabelSettings" uid="uid://cwd2h0pgu7vpf" path="res://label_settings.tres" id="1_whxi8"]
 [ext_resource type="Texture2D" uid="uid://c5c4o2purwiw3" path="res://bkg/bkg_conway.png" id="2_mx57q"]
 
 [node name="TitleScreen" type="Node" unique_id=820850003]

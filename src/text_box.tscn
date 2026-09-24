@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://vb5ixhhpcqta"]
 
-[ext_resource type="LabelSettings" uid="uid://cwd2h0pgu7vpf" path="res://src/label_settings.tres" id="1_sqkml"]
+[ext_resource type="LabelSettings" uid="uid://cwd2h0pgu7vpf" path="res://label_settings.tres" id="1_sqkml"]
 [ext_resource type="Script" uid="uid://c3am1vixny40a" path="res://src/text_box.gd" id="2_sqkml"]
 
 [node name="TextBox" type="Label" unique_id=1149099625]
