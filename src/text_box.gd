@@ -19,6 +19,9 @@ func _init() -> void:
 	update_text()
 
 func _on_timer_timeout() -> void:
+	if (get_node_or_null("Guide")):
+		get_node("Guide").queue_free()
+
 	if (
 		Main.get_singleton().get_state() == Consts.GAME_STATE
 		and not Mother.get_singleton().is_broken()

@@ -5,6 +5,12 @@ static var __singleton: Player = null
 
 var __input_vector: Vector2
 
+var __mouse_right: InputEventAction = InputEventAction.new()
+var __mouse_left: InputEventAction = InputEventAction.new()
+var __mouse_down: InputEventAction = InputEventAction.new()
+var __mouse_up: InputEventAction = InputEventAction.new()
+var __click_timer: int = 0
+
 static func get_singleton() -> Player:
 	if (__singleton == null):
 		__singleton = preload("res://src/player.tscn").instantiate()
@@ -16,6 +22,12 @@ func _init() -> void:
 
 func _ready() -> void:
 	set_sprite(preload("res://src/player_sprite.tscn").instantiate() as Sprite2D)
+
+	__mouse_right.set_action("right")
+	__mouse_left.set_action("left")
+	__mouse_down.set_action("down")
+	__mouse_up.set_action("up")
+
 	super()
 
 func _physics_process(_delta: float) -> void:
@@ -25,7 +37,10 @@ func _physics_process(_delta: float) -> void:
 			
 		set_input_vector(Input.get_vector("left", "right", "up", "down"))
 
-		if (is_on_floor() and Input.is_action_just_pressed("confirm")):
+		if (is_on_floor() and (
+			Input.is_action_just_pressed("confirm")
+			or (Input.is_action_just_pressed("click") and __click_timer > 0)
+		)):
 			set_vel_y(get_vel_y() + Consts.JUMP_HEIGHT)
 
 		set_velocity(Vector3(
@@ -73,6 +88,47 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if (Main.get_singleton().get_state() == Consts.GAME_STATE):
+		__mouse_right.set_pressed(false)
+		__mouse_left.set_pressed(false)
+		__mouse_down.set_pressed(false)
+		__mouse_up.set_pressed(false)
+
+		if (Input.is_action_just_released("click") and __click_timer == 0):
+			__click_timer = 0b10000
+		elif (__click_timer > 0):
+			__click_timer -= 1
+
+		if (Input.is_action_pressed("click")):
+			var mouse_pos: Vector2 = get_viewport().get_mouse_position()
+			var screen_size: Vector2i = get_viewport().get_window().get_content_scale_size()
+
+			__mouse_right.set_pressed(mouse_pos.x > (screen_size.x >> 1))
+			__mouse_left.set_pressed(mouse_pos.x < (screen_size.x >> 1))
+			__mouse_down.set_pressed(mouse_pos.y > (screen_size.y >> 1))
+			__mouse_up.set_pressed(mouse_pos.y < (screen_size.y >> 1))
+
+			__mouse_right.set_strength(
+				(mouse_pos.x - float(screen_size.x >> 1))
+				/float(screen_size.x >> 0b10)
+			)
+			__mouse_left.set_strength(
+				(float(screen_size.x >> 1) - mouse_pos.x)
+				/float(screen_size.x >> 0b10)
+			)
+			__mouse_down.set_strength(
+				(mouse_pos.y - float(screen_size.y >> 1))
+				/float(screen_size.y >> 0b10)
+			)
+			__mouse_up.set_strength(
+				(float(screen_size.y >> 1) - mouse_pos.y)
+				/float(screen_size.y >> 0b10)
+			)
+
+		Input.parse_input_event(__mouse_right)
+		Input.parse_input_event(__mouse_left)
+		Input.parse_input_event(__mouse_down)
+		Input.parse_input_event(__mouse_up)
+
 		if (Input.is_action_just_released("right") or Input.is_action_just_released("down")):
 			get_anim_player().play("front")
 		elif (Input.is_action_just_released("left") or Input.is_action_just_released("up")):
