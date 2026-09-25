@@ -147,7 +147,6 @@ const TEXT_THREE_EGGS: PackedStringArray = [
 	"You do not need to do anything else.",
 	"Stand on Mother and complete this software.",
 	"She does not need four eggs.",
-	"Or five, or six, or the rest.",
 	"Everyone is believing in you.",
 ]
 
