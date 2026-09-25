@@ -35,7 +35,7 @@ func _physics_process(_delta: float) -> void:
 		if (get_position().y < 0):
 			await Main.get_singleton().init_ending(Consts.FALL_ENDING)
 			
-		set_input_vector(Input.get_vector("left", "right", "up", "down"))
+		set_input_vector(Input.get_vector("left", "right", "up", "down").normalized())
 
 		if (is_on_floor() and (
 			Input.is_action_just_pressed("confirm")
@@ -102,27 +102,10 @@ func _process(_delta: float) -> void:
 			var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 			var screen_size: Vector2i = get_viewport().get_window().get_content_scale_size()
 
-			__mouse_right.set_pressed(mouse_pos.x > (screen_size.x >> 1))
-			__mouse_left.set_pressed(mouse_pos.x < (screen_size.x >> 1))
-			__mouse_down.set_pressed(mouse_pos.y > (screen_size.y >> 1))
-			__mouse_up.set_pressed(mouse_pos.y < (screen_size.y >> 1))
-
-			__mouse_right.set_strength(
-				(mouse_pos.x - float(screen_size.x >> 1))
-				/float(screen_size.x >> 0b10)
-			)
-			__mouse_left.set_strength(
-				(float(screen_size.x >> 1) - mouse_pos.x)
-				/float(screen_size.x >> 0b10)
-			)
-			__mouse_down.set_strength(
-				(mouse_pos.y - float(screen_size.y >> 1))
-				/float(screen_size.y >> 0b10)
-			)
-			__mouse_up.set_strength(
-				(float(screen_size.y >> 1) - mouse_pos.y)
-				/float(screen_size.y >> 0b10)
-			)
+			__mouse_right.set_pressed(mouse_pos.x > ((screen_size.x >> 0b10) + (screen_size.x >> 1)))
+			__mouse_left.set_pressed(mouse_pos.x < (screen_size.x >> 0b10))
+			__mouse_down.set_pressed(mouse_pos.y > ((screen_size.y >> 0b10) + (screen_size.y >> 1)))
+			__mouse_up.set_pressed(mouse_pos.y < (screen_size.y >> 0b10))
 
 		Input.parse_input_event(__mouse_right)
 		Input.parse_input_event(__mouse_left)
