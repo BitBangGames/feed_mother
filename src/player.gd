@@ -34,8 +34,40 @@ func _physics_process(_delta: float) -> void:
 	if (Main.get_singleton().get_state() == Consts.GAME_STATE):
 		if (get_position().y < 0):
 			await Main.get_singleton().init_ending(Consts.FALL_ENDING)
-			
-		set_input_vector(Input.get_vector("left", "right", "up", "down").normalized())
+
+		__mouse_right.set_pressed(false)
+		__mouse_left.set_pressed(false)
+		__mouse_down.set_pressed(false)
+		__mouse_up.set_pressed(false)
+
+		if (Input.is_action_just_released("click") and __click_timer == 0):
+			__click_timer = 0b1000
+		elif (__click_timer > 0):
+			__click_timer -= 1
+
+		if (Input.is_action_pressed("click")):
+			var mouse_pos: Vector2 = get_viewport().get_mouse_position()
+			var screen_size: Vector2 = get_viewport().get_window().get_content_scale_size()
+			var radius: float = min(screen_size.x, screen_size.y)/2
+
+			__mouse_right.set_pressed(mouse_pos.x > (screen_size.x + radius)/2)
+			__mouse_left.set_pressed(mouse_pos.x < (screen_size.x - radius)/2)
+			__mouse_down.set_pressed(mouse_pos.y > (screen_size.y + radius)/2)
+			__mouse_up.set_pressed(mouse_pos.y < (screen_size.y - radius)/2)
+
+			if (
+				__mouse_right.is_pressed()
+				or __mouse_left.is_pressed()
+				or __mouse_down.is_pressed()
+				or __mouse_up.is_pressed()
+			):
+				set_input_vector(
+					(mouse_pos - screen_size/2).normalized()
+				)
+			else:
+				set_input_vector(Vector2(0,0))
+		else:
+			set_input_vector(Input.get_vector("left", "right", "up", "down").normalized())
 
 		if (is_on_floor() and (
 			Input.is_action_just_pressed("confirm")
@@ -88,25 +120,6 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if (Main.get_singleton().get_state() == Consts.GAME_STATE):
-		__mouse_right.set_pressed(false)
-		__mouse_left.set_pressed(false)
-		__mouse_down.set_pressed(false)
-		__mouse_up.set_pressed(false)
-
-		if (Input.is_action_just_released("click") and __click_timer == 0):
-			__click_timer = 0b10000
-		elif (__click_timer > 0):
-			__click_timer -= 1
-
-		if (Input.is_action_pressed("click")):
-			var mouse_pos: Vector2 = get_viewport().get_mouse_position()
-			var screen_size: Vector2i = get_viewport().get_window().get_content_scale_size()
-
-			__mouse_right.set_pressed(mouse_pos.x > ((screen_size.x >> 0b10) + (screen_size.x >> 1)))
-			__mouse_left.set_pressed(mouse_pos.x < (screen_size.x >> 0b10))
-			__mouse_down.set_pressed(mouse_pos.y > ((screen_size.y >> 0b10) + (screen_size.y >> 1)))
-			__mouse_up.set_pressed(mouse_pos.y < (screen_size.y >> 0b10))
-
 		Input.parse_input_event(__mouse_right)
 		Input.parse_input_event(__mouse_left)
 		Input.parse_input_event(__mouse_down)
