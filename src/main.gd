@@ -58,6 +58,12 @@ func _notification(what: int) -> void:
 		NOTIFICATION_WM_CLOSE_REQUEST:
 			exit()
 
+func _unhandled_input(event: InputEvent) -> void:
+	if (event is InputEventMouseMotion or event is InputEventMouseButton):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	elif (event is InputEventKey or event is InputEventJoypadButton or event is InputEventJoypadMotion):
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+
 func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("fullscreen")):
 		set_fullscreen(not __fullscreen)
